@@ -9,7 +9,7 @@ class Profile(models.Model):
     user = models.OneToOneField(User,on_delete=models.CASCADE, null=True)
     fullname = models.CharField(max_length=100,blank=True)
     locality = models.CharField(max_length=200, blank=True, null=True)
-    locale_lane = models.CharField(max_length=200, blank=True, null=True)
+    lane_number = models.IntegerField(max_length=5, blank=True, null=True)
     profile_pic= CloudinaryField('image')
 
     def __str__(self):
