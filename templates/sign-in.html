@@ -1,0 +1,51 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+    <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script src="https://kit.fontawesome.com/fc1e235b2e.js"></script>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <title>The Awwards | Login </title>
+    </head>
+
+    <body>
+
+        <div id="wrapper">
+            <div class="container">
+                <div class="phone-app-demo">
+                  <img src="{% static 'images/background.jpg' %}" alt="logo" style="height:500px">
+                </div>  
+
+                <div class="form-data">                
+                    <h2>Welcome Back!</h2>
+
+                    <div class="full">
+                        <form action="{% url 'sign-in'%}" method="POST">
+                            {%csrf_token%}
+                            <div class="mb-3">
+                                <label for="exampleInputEmail1" class="form-label">Username</label>
+                                <input type="text" class="form-control" name="username" aria-describedby="">
+                            </div>
+                            <div class="mb-3">
+                                <label for="exampleInputPassword1" class="form-label">Password</label>
+                                <input type="password" class="form-control" name="password">
+                            </div>
+                            <button type="submit" class="btn btn-dark">Submit</button>
+                        </form>
+                    </div>  
+                    
+                    <div class="sign-up">
+                    Don't have an account? <a href="{% url 'sign-up' %}">Sign up</a>
+                    </div>
+                    
+                    
+                </div>
+            </div> 
+        </div>  
+    </body>
+
+</html>

@@ -16,6 +16,7 @@ from .models import Profile
 # from .forms import EditProfileForm, UserRegisterForm
 from django.urls import resolve
 
+
 def UserProfile(request, username):
    
     Profile.objects.get_or_create(user=request.user)
@@ -28,3 +29,25 @@ def UserProfile(request, username):
         
     }
     return render(request, 'profile.html', context)
+
+def register(request):
+    
+    if request.method == "POST":
+        form = UserRegisterForm(request.POST)
+        if form.is_valid():
+            form.save()
+            
+            username = form.cleaned_data['username']
+            password = form.cleaned_data['password1']
+
+            user = authenticate(username=username, password=password)
+            login(request,user)
+            messages.success(request, f'Account created for { username }!!')
+            return redirect('index')
+
+    else:
+        form = UserRegisterForm()
+    context = {
+        'form': form,
+    }
+    return render(request, 'sign-up.html', context)    

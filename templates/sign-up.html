@@ -1,0 +1,50 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+    <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script src="https://kit.fontawesome.com/fc1e235b2e.js"></script>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <title>The Awwards | Login </title>
+    </head>
+
+    <body>
+
+        <div id="wrapper">
+            <div class="container">
+                <div class="phone-app-demo">
+                  <img src="{% static 'images/background.jpg' %}" alt="logo" style="height:500px">
+                </div>  
+
+                <div class="form-data">                
+                    
+
+                    <div class="full">
+                        <form action="" method="POST">
+                            {% csrf_token %}
+                        
+                               {{ form }}
+                            
+                                <button type="submit" class="btn btn-dark" type="submit">Sign Up</button> 
+                        
+                            </form>
+                         
+                    </div>  
+                    
+                    <div class="sign-up">
+                    Have an account? <a href="{% url 'sign-in' %}">Sign In</a>
+                    </div>
+                    
+                    
+                </div>
+            </div> 
+        </div>  
+    </body>
+
+</html>
+
+
