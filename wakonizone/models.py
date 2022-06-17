@@ -7,8 +7,8 @@ from django.dispatch import receiver
 class Profile(models.Model):
     
     user = models.OneToOneField(User,on_delete=models.CASCADE, null=True)
-    fullname = models.CharField(max_length=100,blank=True)
-    locality = models.CharField(max_length=200, blank=True, null=True)
+    fullname = models.CharField(max_length=50,blank=True)
+    locality = models.CharField(max_length=30, blank=True, null=True)
     lane_number = models.IntegerField(blank=True, null=True)
     profile_pic= CloudinaryField('image')
 
@@ -27,8 +27,8 @@ class Profile(models.Model):
          self.delete()
 
 class Locality(models.Model):
-    name = models.CharField()
-    location= models.CharField()
+    locality_name = models.CharField(max_length=30)
+    location= models.CharField(max_length=30)
     occupants = models.IntegerField(blank=True, null=True)
    
     user= models.ForeignKey(User, on_delete=models.CASCADE, null=True)

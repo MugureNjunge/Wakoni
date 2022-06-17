@@ -33,6 +33,24 @@ def register(request):
     }
     return render(request, 'sign-up.html', context)   
 
+def signin(request):
+
+    if request.method == 'POST':
+        username = request.POST['username']
+        password = request.POST['password']
+        user = authenticate(request, username=username, password=password)
+        if user is not None:
+            login(request, user)
+            return redirect('index')
+        
+        else:
+            messages.success(request,('You information is not valid'))
+            return redirect('sign-in')
+
+    else:
+        return render(request,'sign-in.html')
+
+
 def UserProfile(request, username):
    
     Profile.objects.get_or_create(user=request.user)
