@@ -3,7 +3,7 @@ from django.contrib.auth.models import User
 from django.contrib import messages
 from django.contrib.auth import authenticate, login
 from django.contrib.auth.models import User
-from .models import Profile, Locality
+from .models import Profile, Locality, Post
 from .forms import UserRegisterForm
 
 
@@ -50,6 +50,28 @@ def signin(request):
     else:
         return render(request,'sign-in.html')
 
+def UserLocality(request, username):
+    Locality.objects.get(user=request.user)
+    user = get_object_or_404(User, username=username)
+    locality = Locality.objects.get(user=user)
+    url_name = resolve(request.path).url_name
+    projects = Post.objects.filter(profile=profile)
+    if url_name == 'profile':
+        posts = Post.objects.filter(profile=profile)
+    else:
+        posts = profile()
+    
+    # Profile Stats
+    posts = Post.objects.filter(profile=profile)
+
+    context = {
+        'posts': posts,
+        'profile':profile,
+
+    }
+    return render(request, 'locality.html', context)
+
+
 
 def UserProfile(request, username):
    
@@ -63,3 +85,5 @@ def UserProfile(request, username):
         
     }
     return render(request, 'profile.html', context)
+
+

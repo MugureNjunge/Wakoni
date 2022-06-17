@@ -52,5 +52,36 @@ class Locality(models.Model):
     def delete_locality(self):
         self.delete()         
 
-  
+class Post(models.Model):
+    title= models.CharField(max_length=100)
+    post_image= CloudinaryField('image')
+    description= models.TextField()
+    
+    user= models.ForeignKey(User, on_delete=models.CASCADE, null=True)
+    
+
+    def __str__(self):
+        return self.title + ' - ' + self.description
+    
+    def save_post(self):
+        self.save()
+
+    def delete_project(self):
+       self.delete()    
+
+    @classmethod
+    def search_by_posts(cls, search_term):
+        posts = cls.objects.filter(title__icontains=search_term)
+        return posts
+
+    @classmethod
+    def search_by_user(cls, user):
+        posts = cls.objects.filter(user=user)
+        return posts     
+
+    @classmethod
+    def get_posts_by_profile(cls, profile):
+        posts = Post.objects.filter(profile__pk=profile)
+        return posts
+    
 
