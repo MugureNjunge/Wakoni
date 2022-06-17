@@ -53,20 +53,15 @@ def signin(request):
 def UserLocality(request, username):
     Locality.objects.get(user=request.user)
     user = get_object_or_404(User, username=username)
+
     locality = Locality.objects.get(user=user)
-    url_name = resolve(request.path).url_name
-    projects = Post.objects.filter(profile=profile)
-    if url_name == 'profile':
-        posts = Post.objects.filter(profile=profile)
-    else:
-        posts = profile()
-    
-    # Profile Stats
-    posts = Post.objects.filter(profile=profile)
+    posts = Post.objects.filter(user=user)
+    profiles = Profile.objects.filter(user=user)
 
     context = {
         'posts': posts,
-        'profile':profile,
+        'locality': locality,
+        'profiles': profiles
 
     }
     return render(request, 'locality.html', context)
