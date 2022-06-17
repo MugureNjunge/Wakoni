@@ -4,9 +4,11 @@ from django.contrib import messages
 from django.contrib.auth import authenticate, login
 from django.contrib.auth.models import User
 from .models import Profile, Locality, Post
-from .forms import UserRegisterForm
+from .forms import UserRegisterForm, ProfileForm
+from django.contrib.auth.decorators import login_required
 
 
+# @login_required(login_url='/accounts/sign-in/')
 def index(request):
     localities = Locality.objects.all()
     return render(request,'index.html',{'localities':localities})
@@ -54,12 +56,11 @@ def UserLocality(request, username):
     Locality.objects.get(user=request.user)
     user = get_object_or_404(User, username=username)
 
-    locality = Locality.objects.get(user=user)
-    posts = Post.objects.filter(user=user)
-    profiles = Profile.objects.filter(user=user)
+    locality = Locality.objects.get(username=username)
+    profiles = Profile.objects.filter(username=username)
 
     context = {
-        'posts': posts,
+      
         'locality': locality,
         'profiles': profiles
 

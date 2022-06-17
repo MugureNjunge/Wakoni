@@ -9,7 +9,7 @@ class Profile(models.Model):
     user = models.OneToOneField(User,on_delete=models.CASCADE, null=True)
     fullname = models.CharField(max_length=50,blank=True)
     locality = models.CharField(max_length=30, blank=True, null=True)
-    lane_number = models.IntegerField(blank=True, null=True)
+    # lane_number = models.IntegerField(blank=True, null=True)
     profile_pic= CloudinaryField('image')
 
     def __str__(self):
@@ -27,9 +27,10 @@ class Profile(models.Model):
          self.delete()
 
 class Locality(models.Model):
-    location= models.CharField(max_length=30)
+
     locality_name = models.CharField(max_length=30)
     occupants = models.IntegerField(blank=True, null=True)
+    locality_image= CloudinaryField('image')
    
     user= models.ForeignKey(User, on_delete=models.CASCADE, null=True)
 

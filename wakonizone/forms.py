@@ -21,10 +21,10 @@ class ProfileForm(ModelForm):
     profile_pic = forms.ImageField(required=True)        
     fullname = forms.CharField(widget=forms.TextInput(attrs={'class':'form-control', 'placeholder':'fullname'}))
     locality = forms.CharField(widget=forms.TextInput(attrs={'class':'form-control', 'placeholder':'locality'}))
-    lane_number = forms.IntegerField(widget=forms.TextInput(attrs={'class':'form-control', 'placeholder' : 'Lane_number'}))              
+    # lane_number = forms.IntegerField(widget=forms.TextInput(attrs={'class':'form-control', 'placeholder' : 'lane number'}))              
 
     class Meta:
 
         model = Profile
-        fields = ['fullname', 'locality', 'lane_number']
+        fields = ['fullname', 'locality','profile_pic']
         exclude =['user']
