@@ -15,8 +15,11 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
+from wakonizone.views import UserProfile
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('wakonizone.urls')),
+    path('<username>/',UserProfile, name='profile'),
+    
 ]

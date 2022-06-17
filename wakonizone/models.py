@@ -11,6 +11,7 @@ class Profile(models.Model):
     locality = models.CharField(max_length=30, blank=True, null=True)
     # lane_number = models.IntegerField(blank=True, null=True)
     profile_pic= CloudinaryField('image')
+    bio= models.CharField(max_length=50,blank=True)
 
     def __str__(self):
         return self.fullname

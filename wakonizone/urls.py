@@ -13,6 +13,7 @@ urlpatterns = [
     path('sign-up/',views.register,name='sign-up'),
     path('accounts/sign-in/',views.signin,name='sign-in'),
     path('locality/',views.UserLocality,name='locality'),
+    path('profile/edit/', views.EditProfile, name='editprofile'),
    
 
 ]

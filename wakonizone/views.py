@@ -82,4 +82,28 @@ def UserProfile(request, username):
     }
     return render(request, 'profile.html', context)
 
+def EditProfile(request):
+    
+    user = request.user.id
+    # current_user=request.user
+    profile = Profile.objects.get(user_id=user)
+
+    if request.method == "POST":
+        form = ProfileForm(request.POST, request.FILES, instance=request.user.profile)
+        if form.is_valid():
+            # profile.user = current_user
+            profile.profile_pic = form.cleaned_data.get('profile_pic')
+            profile.fullname = form.cleaned_data.get('fullname')
+            profile.locality = form.cleaned_data.get('locality')
+            profile.bio = form.cleaned_data.get('bio')
+            profile.save()
+            return redirect('profile', profile.user.username)
+    else:
+        form = ProfileForm(instance=request.user.profile)
+
+    context = {
+        'form':form,
+    }
+    return render(request, 'editprofile.html', context)    
+
 
