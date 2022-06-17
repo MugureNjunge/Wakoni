@@ -26,5 +26,31 @@ class Profile(models.Model):
     def delete_profile(self):
          self.delete()
 
+class Locality(models.Model):
+    name = models.CharField()
+    location= models.CharField()
+    occupants = models.IntegerField(blank=True, null=True)
+   
+    user= models.ForeignKey(User, on_delete=models.CASCADE, null=True)
+
+    def __str__(self):
+        return self.title + '' + self.description
+    
+    def save_locality(self):
+        self.save()
+
+    @classmethod
+    def search_by_localities(cls, search_term):
+        localities = cls.objects.filter(title__icontains=search_term)
+        return localities
+
+    @classmethod
+    def search_by_user(cls, user):
+        localities = cls.objects.filter(user=user)
+        return localities     
+
+    def delete_locality(self):
+        self.delete()         
+
   
 

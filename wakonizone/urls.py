@@ -8,13 +8,13 @@ from rest_framework.urlpatterns import format_suffix_patterns
 
 
 urlpatterns = [
-    # path('',views.index, name='index'),
+    path('',views.index, name='index'),
 
     # path('profiles/',views.profile_list, name='profile_api'),
     # path('projects/',views.project_list, name='project_api'),
     
     path('sign-up/',views.register,name='sign-up'),
-    # path('accounts/sign-in/',views.signin,name='sign-in'),
+    path('accounts/sign-in/',views.signin,name='sign-in'),
     # path('sign-out/', views.signout, name='sign-out'),
 
 ]

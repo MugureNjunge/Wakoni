@@ -3,21 +3,13 @@ from django.contrib.auth.models import User
 from django.contrib import messages
 from django.contrib.auth import authenticate, login
 from django.contrib.auth.models import User
-from .models import Profile
+from .models import Profile, Locality
 from .forms import UserRegisterForm
 
-def UserProfile(request, username):
-   
-    Profile.objects.get_or_create(user=request.user)
-    user = get_object_or_404(User, username=username)
-    profile = Profile.objects.get(user=user)
 
-    context = {
-        
-        'profile':profile
-        
-    }
-    return render(request, 'profile.html', context)
+def index(request):
+    localities = Locality.objects.all()
+    return render(request,'index.html',{'localities':localities})
 
 def register(request):
     
@@ -39,4 +31,17 @@ def register(request):
     context = {
         'form': form,
     }
-    return render(request, 'sign-up.html', context)    
+    return render(request, 'sign-up.html', context)   
+
+def UserProfile(request, username):
+   
+    Profile.objects.get_or_create(user=request.user)
+    user = get_object_or_404(User, username=username)
+    profile = Profile.objects.get(user=user)
+
+    context = {
+        
+        'profile':profile
+        
+    }
+    return render(request, 'profile.html', context)
