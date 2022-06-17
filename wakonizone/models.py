@@ -27,14 +27,14 @@ class Profile(models.Model):
          self.delete()
 
 class Locality(models.Model):
-    locality_name = models.CharField(max_length=30)
     location= models.CharField(max_length=30)
+    locality_name = models.CharField(max_length=30)
     occupants = models.IntegerField(blank=True, null=True)
    
     user= models.ForeignKey(User, on_delete=models.CASCADE, null=True)
 
     def __str__(self):
-        return self.title + '' + self.description
+        return self.location + ' - ' + self.locality_name
     
     def save_locality(self):
         self.save()
