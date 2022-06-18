@@ -31,7 +31,7 @@ class ProfileForm(ModelForm):
 
 class NewBusinessForm(forms.ModelForm):
 
-    business_name = forms.CharField(widget=forms.TextInput(attrs={'class':'form-control', 'placeholder':'business name'}))
+    title = forms.CharField(widget=forms.TextInput(attrs={'class':'form-control', 'placeholder':'title'}))
     business_image = forms.ImageField(required=True)
     description = forms.CharField(widget=forms.TextInput(attrs={'class': 'input', 'placeholder': 'Description'}), required=True)
     link = forms.CharField(widget=forms.TextInput(attrs={'class': 'input', 'placeholder': 'Link'}), required=True)
@@ -39,7 +39,7 @@ class NewBusinessForm(forms.ModelForm):
 
     class Meta:
         model = Business
-        fields = ['business_image','business_name','description', 'link']
+        fields = ['business_image','title','description', 'link']
         
 
 

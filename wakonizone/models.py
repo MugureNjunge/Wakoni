@@ -59,7 +59,7 @@ class Locality(models.Model):
 
 class Business(models.Model):
   
-    business_name = models.CharField(max_length=30)
+    title = models.CharField(max_length=30)
     business_email = models.EmailField(max_length=30)
     business_image= CloudinaryField('image')
     # locality = models.OneToOneField(User,on_delete=models.CASCADE, null=True)
