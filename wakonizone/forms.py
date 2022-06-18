@@ -30,16 +30,16 @@ class ProfileForm(ModelForm):
         exclude =['user']
 
 class NewBusinessForm(forms.ModelForm):
-  
+
+    business_name = forms.CharField(widget=forms.TextInput(attrs={'class':'form-control', 'placeholder':'business name'}))
     business_image = forms.ImageField(required=True)
-    title = forms.CharField(widget=forms.TextInput(attrs={'class': 'input', 'placeholder': 'Title'}), required=True)
     description = forms.CharField(widget=forms.TextInput(attrs={'class': 'input', 'placeholder': 'Description'}), required=True)
     link = forms.CharField(widget=forms.TextInput(attrs={'class': 'input', 'placeholder': 'Link'}), required=True)
 
 
     class Meta:
         model = Business
-        fields = ['title', 'business_image','description', 'link']
+        fields = ['business_image','business_name','description', 'link']
         
 
 

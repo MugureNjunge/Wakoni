@@ -34,7 +34,6 @@ class Locality(models.Model):
 
     locality_name = models.CharField(max_length=30)
     occupants = models.IntegerField(blank=True, null=True)
-    locality_image= CloudinaryField('image')
    
     user= models.ForeignKey(User, on_delete=models.CASCADE, null=True)
 
@@ -62,6 +61,7 @@ class Business(models.Model):
   
     business_name = models.CharField(max_length=30)
     business_email = models.EmailField(max_length=30)
+    business_image= CloudinaryField('image')
     # locality = models.OneToOneField(User,on_delete=models.CASCADE, null=True)
    
     user= models.ForeignKey(User, on_delete=models.CASCADE, null=True)
