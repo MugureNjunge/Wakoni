@@ -9,9 +9,9 @@ class Profile(models.Model):
     user = models.OneToOneField(User,on_delete=models.CASCADE, null=True)
     fullname = models.CharField(max_length=50,blank=True)
     locality = models.CharField(max_length=30, blank=True, null=True)
-    # lane_number = models.IntegerField(blank=True, null=True)
     profile_pic= CloudinaryField('image')
     bio= models.CharField(max_length=50,blank=True)
+    email= models.EmailField(max_length=50,blank=True)
 
     def __str__(self):
         return self.fullname
@@ -41,22 +41,20 @@ class Locality(models.Model):
     def __str__(self):
         return self.location + ' - ' + self.locality_name
     
-    def save_locality(self):
-        self.save()
+    def create_locality(self):
+        self.create()
 
     @classmethod
     def search_by_localities(cls, search_term):
         localities = cls.objects.filter(title__icontains=search_term)
-        return localities
-
-    @classmethod
-    def search_by_user(cls, user):
-        localities = cls.objects.filter(user=user)
-        return localities   
+        return localities  
 
     def update_locality(self):
-       self.update()        
+       self.update()    
 
+    def update_occupants(self):
+       self.update()        
+       
     def delete_locality(self):
         self.delete()         
 
@@ -74,18 +72,13 @@ class Post(models.Model):
     def save_post(self):
         self.save()
 
-    def delete_project(self):
+    def delete_post(self):
        self.delete()    
 
     @classmethod
     def search_by_posts(cls, search_term):
         posts = cls.objects.filter(title__icontains=search_term)
-        return posts
-
-    @classmethod
-    def search_by_user(cls, user):
-        posts = cls.objects.filter(user=user)
-        return posts     
+        return posts    
 
     @classmethod
     def get_posts_by_profile(cls, profile):
