@@ -3,7 +3,7 @@ from django.contrib.auth.models import User
 from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout
 from .models import *
-from .forms import UserRegisterForm, ProfileForm, NewBusinessForm
+from .forms import UserRegisterForm, ProfileForm, NewBusinessForm, NewPostForm
 from django.contrib.auth.decorators import login_required
 from .serializers import ProfileSerializer, LocalitySerializer
 from rest_framework import status
@@ -232,6 +232,21 @@ def search(request):
                                              "searched_business":searched_business})
     else:
         message = "You haven't searched for any business"
-        return render(request,'search.html',{"message":message})      
+        return render(request,'search.html',{"message":message})   
+
+@login_required(login_url='/accounts/sign-in/')
+def NewPost(request):
+    current_user = request.user
+    if request.method == 'POST':
+        form = NewPostForm(request.POST, request.FILES)
+        if form.is_valid():
+            post = form.save(commit=False)
+            post.user = current_user
+            post.save()
+        return redirect('index')
+        
+    else:
+        form = NewPostForm()
+    return render(request, 'newpost.html', {"form":form, "current_user":current_user})           
 
 
