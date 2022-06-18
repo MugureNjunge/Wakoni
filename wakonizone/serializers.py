@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from .models import Profile, Locality, Business
+from .models import Profile, Locality, Business, Post
 
 class ProfileSerializer(serializers.ModelSerializer):
     class Meta:
@@ -14,4 +14,9 @@ class LocalitySerializer(serializers.ModelSerializer):
 class BusinessSerializer(serializers.ModelSerializer):
     class Meta:
         model=Business
-        fields=('title','description','business_image','link','business_email')                
+        fields=('title','description','business_image','link','business_email')   
+
+class PostSerializer(serializers.ModelSerializer):
+    class Meta:
+        model=Post
+        fields=('title','description','post_image')                       
