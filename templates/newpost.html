@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load crispy_forms_tags %}
+{% block content %}
+
+  <div id="wrapper">
+    <div class="container">
+      <div class="row">
+
+          <form action="" method="POST" enctype="multipart/form-data">
+              {% csrf_token %}
+            <div class="logo">
+              <h3 style="padding: 10px; font-size: 20px;font-style: italic;">Add a post</h3>
+              <hr>
+            </div>
+
+            <div class="form-group font-size:5px">
+
+              {{form.title}} <br>
+              {{form.description}} <br>
+              {{form.post_image}}
+
+            </div>  
+
+            <button class="form-btn bg-dark" type="submit">Add a Post</button>
+                      
+          </form>
+      </div>
+
+  </div>
+
+
+{% endblock content %}

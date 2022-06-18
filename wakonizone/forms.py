@@ -42,6 +42,16 @@ class NewBusinessForm(forms.ModelForm):
         model = Business
         fields = ['business_image','title','description', 'link']
         
+class NewPostForm(forms.ModelForm):
+
+    title = forms.CharField(widget=forms.TextInput(attrs={'class':'form-control', 'placeholder':'title'}))
+    post_image = forms.ImageField(required=True)
+    description = forms.CharField(widget=forms.TextInput(attrs={'class': 'input', 'placeholder': 'Description'}), required=True)
+
+    class Meta:
+        model = Business
+        fields = ['post_image','title','description']
+        
 
 
 
