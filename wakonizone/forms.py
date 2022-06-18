@@ -2,7 +2,7 @@ from django import forms
 from django.contrib.auth.models import User
 from django.contrib.auth.forms import UserCreationForm
 from django.forms import ModelForm, widgets
-from .models import Profile
+from .models import Profile, Business
 
 class UserRegisterForm(UserCreationForm):
 
@@ -29,15 +29,19 @@ class ProfileForm(ModelForm):
         fields = ['fullname', 'locality','profile_pic']
         exclude =['user']
 
-# class EditProfileForm(forms.ModelForm):
-#     image = forms.ImageField(required=True)
-#     first_name = forms.CharField(widget=forms.TextInput(attrs={'class': 'input', 'placeholder': 'First Name'}), required=True)
-#     last_name = forms.CharField(widget=forms.TextInput(attrs={'class': 'input', 'placeholder': 'Last Name'}), required=True)
-#     bio = forms.CharField(widget=forms.TextInput(attrs={'class': 'input', 'placeholder': 'Bio'}), required=True)
-#     location = forms.CharField(widget=forms.TextInput(attrs={'class': 'input', 'placeholder': 'Address'}), required=True)
+class NewBusinessForm(forms.ModelForm):
+  
+    business_image = forms.ImageField(required=True)
+    title = forms.CharField(widget=forms.TextInput(attrs={'class': 'input', 'placeholder': 'Title'}), required=True)
+    description = forms.CharField(widget=forms.TextInput(attrs={'class': 'input', 'placeholder': 'Description'}), required=True)
+    link = forms.CharField(widget=forms.TextInput(attrs={'class': 'input', 'placeholder': 'Link'}), required=True)
 
-#     class Meta:
-#         model = Profile
-#         fields = ['image', 'first_name', 'last_name', 'bio', 'url', 'location']
+
+    class Meta:
+        model = Business
+        fields = ['title', 'business_image','description', 'link']
+        
+
+
 
 
