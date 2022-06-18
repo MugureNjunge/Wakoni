@@ -63,7 +63,7 @@ class Business(models.Model):
     business_email = models.EmailField(max_length=30)
     business_image= CloudinaryField('image')
     link= models.CharField(max_length=250,blank=True)
-    description= models.TextField()
+    description= models.TextField(blank=True, null=True)
     # locality = models.OneToOneField(User,on_delete=models.CASCADE, null=True)
    
     user= models.ForeignKey(User, on_delete=models.CASCADE, null=True)
@@ -88,7 +88,7 @@ class Business(models.Model):
 class Post(models.Model):
     title= models.CharField(max_length=100)
     post_image= CloudinaryField('image')
-    description= models.TextField()
+    description= models.TextField(blank=True, null=True)
     
     user= models.ForeignKey(User, on_delete=models.CASCADE, null=True)
     
