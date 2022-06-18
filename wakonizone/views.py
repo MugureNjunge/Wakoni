@@ -5,7 +5,7 @@ from django.contrib.auth import authenticate, login, logout
 from .models import *
 from .forms import UserRegisterForm, ProfileForm
 from django.contrib.auth.decorators import login_required
-from .serializers import ProfileSerializer
+from .serializers import ProfileSerializer, LocalitySerializer
 from rest_framework import status
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
@@ -172,11 +172,38 @@ def profile_detail(request,id, format=None):
         profile.delete()
         return Response(status=status.HTTP_204_NO_CONTENT)   
 
+@api_view(['GET','POST'])
+def locality_list(request, format=None):
+    #get all localities
+    if request.method =='GET':
+        locality = Locality.objects.all()
+        #serialize them
+        serializer = LocalitySerializer(locality, many=True)
+        #return json
+        return Response(serializer.data)
+    if request.method =='POST':
+        serializer = LocalitySerializer(data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
 
-
-
-
-
-
-
+@api_view(['GET','PUT','DELETE'])    
+def locality_detail(request,id, format=None):
+    locality = Locality.objects.filter().first()
+    try:
+        Locality.objects.get(pk=id)
+    except Locality.DoesNotExist:
+        return Response(status=status.HTTP_404_NOT_FOUND)
+    if request.method =='GET':
+        serializer = LocalitySerializer(locality)
+        return Response(serializer.data)
+    elif request.method =='PUT':
+        serializer = LocalitySerializer(locality, data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+    elif request.method =='DELETE':
+        locality.delete()
+        return Response(status=status.HTTP_204_NO_CONTENT)       
 
