@@ -14,6 +14,8 @@ urlpatterns = [
     path('accounts/sign-in/',views.signin,name='sign-in'),
     path('accounts/sign-out/', views.signout, name='sign-out'),
 
+    path('profiles/',views.profile_list, name='profile_api'),
+
     path('locality/',views.UserLocality,name='locality'),
     path('police/', views.Police, name='police'),
     path('health/', views.Health, name='health'),

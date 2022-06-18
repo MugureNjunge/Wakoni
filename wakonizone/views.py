@@ -2,28 +2,19 @@ from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.models import User
 from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout
-from django.contrib.auth.models import User
-from .models import Profile, Locality, Post
+from .models import *
 from .forms import UserRegisterForm, ProfileForm
 from django.contrib.auth.decorators import login_required
-
-from django.forms import GenericIPAddressField
-from django.shortcuts import get_object_or_404, render,redirect
-from django.http import JsonResponse, HttpResponseRedirect
-from django.urls import resolve, reverse
-from .forms import UserRegisterForm, ProfileForm, NewProjectForm, RatingForm
-from django.contrib.auth.models import User
-from django.core.exceptions import ObjectDoesNotExist
-from django.contrib import messages
-from django.contrib.auth import authenticate, login, logout
-from .models import *
-from django.contrib.auth.decorators import login_required
-from .serializers import ProfileSerializer, ProjectSerializer, RatingSerializer
+from .serializers import ProfileSerializer
 from rest_framework import status
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
 
 
+from django.forms import GenericIPAddressField
+from django.http import JsonResponse, HttpResponseRedirect
+from django.urls import resolve, reverse
+from django.core.exceptions import ObjectDoesNotExist
 
 # @login_required(login_url='/accounts/sign-in/')
 def index(request):
@@ -146,9 +137,7 @@ def profile_list(request, format=None):
     #get all profiles
     if request.method =='GET':
         profiles = Profile.objects.all()
-        #serialize them
-        serializer = ProfileSerializer(profiles, many=True)
-        #return json
+        serializer = ProfileSerializer(profiles, many=True)   
         return Response(serializer.data)
     if request.method =='POST':
         serializer = ProfileSerializer(data=request.data)
