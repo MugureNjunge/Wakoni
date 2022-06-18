@@ -15,8 +15,10 @@ urlpatterns = [
     path('accounts/sign-out/', views.signout, name='sign-out'),
 
     path('profiles/',views.profile_list, name='profile_api'),
+    path('localities/',views.locality_list, name='locality_api'),
 
     path('profiles/<int:id>', views.profile_detail),
+      path('localities/<int:id>', views.locality_detail),
 
     path('locality/',views.UserLocality,name='locality'),
     path('police/', views.Police, name='police'),
