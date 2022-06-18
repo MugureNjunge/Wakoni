@@ -92,12 +92,7 @@ class Post(models.Model):
         posts = Post.objects.filter(profile__pk=profile)
         return posts
 
-class Video(models.Model):
-    caption=models.CharField(max_length=100)
-    video=models.FileField(upload_to="video/%y") 
 
-    def __str__(self):
-      return self.caption
 
 
 

@@ -22,9 +22,8 @@ def index(request):
     return render(request, 'index.html')
 
 def index(request):
-    video=Video.objects.all()
     
-    return render(request,'index.html',{"video":video})
+    return render(request,'index.html')
 
 def register(request):
     
