@@ -11,7 +11,7 @@ class Profile(models.Model):
     locality = models.CharField(max_length=30, blank=True, null=True)
     profile_pic= CloudinaryField('image')
     bio= models.CharField(max_length=50,blank=True)
-    email= models.EmailField(max_length=50,blank=True)
+    # email= models.EmailField(max_length=50,blank=True)
 
     def __str__(self):
         return self.fullname
@@ -56,7 +56,32 @@ class Locality(models.Model):
        self.update()        
        
     def delete_locality(self):
-        self.delete()         
+        self.delete()    
+
+class Business(models.Model):
+  
+    business_name = models.CharField(max_length=30)
+    business_email = models.EmailField(max_length=30)
+    # locality = models.OneToOneField(User,on_delete=models.CASCADE, null=True)
+   
+    user= models.ForeignKey(User, on_delete=models.CASCADE, null=True)
+
+    def __str__(self):
+        return self.business_name + ' - ' + self.business_email
+    
+    def create_business(self):
+        self.create()
+
+    @classmethod
+    def search_by_businesses(cls, search_term):
+        businesses = cls.objects.filter(title__icontains=search_term)
+        return businesses 
+
+    def update_business(self):
+       self.update()           
+       
+    def delete_business(self):
+        self.delete()              
 
 class Post(models.Model):
     title= models.CharField(max_length=100)

@@ -22,12 +22,11 @@ class ProfileForm(ModelForm):
     fullname = forms.CharField(widget=forms.TextInput(attrs={'class':'form-control', 'placeholder':'fullname'}))
     locality = forms.CharField(widget=forms.TextInput(attrs={'class':'form-control', 'placeholder':'locality'}))
     bio = forms.CharField(widget=forms.TextInput(attrs={'class': 'input', 'placeholder': 'Bio'}), required=True)
-    # lane_number = forms.IntegerField(widget=forms.TextInput(attrs={'class':'form-control', 'placeholder' : 'lane number'}))              
-    email = forms.EmailField(widget=forms.TextInput(attrs={'class':'form-control', 'placeholder': 'email'}))
+  
     class Meta:
 
         model = Profile
-        fields = ['fullname', 'locality','profile_pic', 'email']
+        fields = ['fullname', 'locality','profile_pic']
         exclude =['user']
 
 # class EditProfileForm(forms.ModelForm):
