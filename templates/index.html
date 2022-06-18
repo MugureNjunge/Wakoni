@@ -190,14 +190,14 @@
       <li>
       </li>
       <li>
-        <a href="#" class="nav-link text-white">
+        <a href="{% url 'health' %}" class="nav-link text-white">
           <svg class="bi pe-none me-2" width="16" height="16"><use xlink:href="#table"/></svg>
           Health Department
         </a>
       </li>
       
       <li>
-        <a href="#" class="nav-link text-white">
+        <a href="{% url 'police' %}" class="nav-link text-white">
           <svg class="bi pe-none me-2" width="16" height="16"><use xlink:href="#speedometer2"/></svg>
           Police Department
         </a>
@@ -226,6 +226,19 @@
         </a>  
           
       </li> 
+
+      <li> 
+        <br>        
+      
+        <h6>Resources</h6>
+        <ul class="list-unstyled text-small">
+          <li><a class="link-secondary" href="#">Profile API</a></li>
+          <li><a class="link-secondary" href="#">Neighbourhood API</a></li>
+          <li><a class="link-secondary" href="#">Zonal Co-ordinators</a></li>
+          <li><a class="link-secondary" href="#">Add a complaint</a></li>
+        </ul>
+      
+      </li>    
 
     </ul>
     <hr>
@@ -275,26 +288,8 @@
       <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="d-block mb-2" role="img" viewBox="0 0 24 24"><title>Product</title><circle cx="12" cy="12" r="10"/><path d="M14.31 8l5.74 9.94M9.69 8h11.48M7.38 12l5.74-9.94M9.69 16L3.95 6.06M14.31 16H2.83m13.79-4l-5.74 9.94"/></svg>
       <small class="d-block mb-3 text-muted">&copy; 2020–2022</small>
     </div>
-    <div class="col-6 col-md">
-      <h5>Features</h5>
-      <ul class="list-unstyled text-small">
-        <li><a class="link-secondary" href="#">Cool stuff</a></li>
-        <li><a class="link-secondary" href="#">Random feature</a></li>
-        <li><a class="link-secondary" href="#">Team feature</a></li>
-        <li><a class="link-secondary" href="#">Stuff for developers</a></li>
-        <li><a class="link-secondary" href="#">Another one</a></li>
-        <li><a class="link-secondary" href="#">Last time</a></li>
-      </ul>
-    </div>
-    <div class="col-6 col-md">
-      <h5>Resources</h5>
-      <ul class="list-unstyled text-small">
-        <li><a class="link-secondary" href="#">Resource name</a></li>
-        <li><a class="link-secondary" href="#">Resource</a></li>
-        <li><a class="link-secondary" href="#">Another resource</a></li>
-        <li><a class="link-secondary" href="#">Final resource</a></li>
-      </ul>
-    </div>
+
+  
     <div class="col-6 col-md">
       <h5>Resources</h5>
       <ul class="list-unstyled text-small">

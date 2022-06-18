@@ -12,9 +12,11 @@ urlpatterns = [
 
     path('sign-up/',views.register,name='sign-up'),
     path('accounts/sign-in/',views.signin,name='sign-in'),
-    path('sign-out/', views.signout, name='sign-out'),
+    path('accounts/sign-out/', views.signout, name='sign-out'),
 
     path('locality/',views.UserLocality,name='locality'),
+    path('police/', views.Police, name='police'),
+    path('health/', views.Health, name='health'),
 
     path('profile/edit/', views.EditProfile, name='editprofile'),
     

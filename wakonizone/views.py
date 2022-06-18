@@ -7,6 +7,23 @@ from .models import Profile, Locality, Post
 from .forms import UserRegisterForm, ProfileForm
 from django.contrib.auth.decorators import login_required
 
+from django.forms import GenericIPAddressField
+from django.shortcuts import get_object_or_404, render,redirect
+from django.http import JsonResponse, HttpResponseRedirect
+from django.urls import resolve, reverse
+from .forms import UserRegisterForm, ProfileForm, NewProjectForm, RatingForm
+from django.contrib.auth.models import User
+from django.core.exceptions import ObjectDoesNotExist
+from django.contrib import messages
+from django.contrib.auth import authenticate, login, logout
+from .models import *
+from django.contrib.auth.decorators import login_required
+from .serializers import ProfileSerializer, ProjectSerializer, RatingSerializer
+from rest_framework import status
+from rest_framework.decorators import api_view
+from rest_framework.response import Response
+
+
 
 # @login_required(login_url='/accounts/sign-in/')
 def index(request):
@@ -57,6 +74,7 @@ def signout(request):
 
     return redirect('sign-in')        
 
+@login_required(login_url='/accounts/sign-in/')
 def UserLocality(request, username):
     Locality.objects.get(user=request.user)
     user = get_object_or_404(User, username=username)
@@ -72,6 +90,7 @@ def UserLocality(request, username):
     }
     return render(request, 'locality.html', context)
 
+@login_required(login_url='/accounts/sign-in/')
 def UserProfile(request, username):
    
     Profile.objects.get_or_create(user=request.user)
@@ -85,6 +104,7 @@ def UserProfile(request, username):
     }
     return render(request, 'profile.html', context)
 
+@login_required(login_url='/accounts/sign-in/')
 def EditProfile(request):
     
     user = request.user.id
@@ -107,6 +127,59 @@ def EditProfile(request):
     context = {
         'form':form,
     }
-    return render(request, 'editprofile.html', context)    
+    return render(request, 'editprofile.html', context) 
+
+def Police(request):
+    current_user = request.user
+    if request.method == 'GET':
+
+       return render(request, 'police.html', {"current_user":current_user})
+
+def Health(request):
+    current_user = request.user
+    if request.method == 'GET':
+
+       return render(request, 'health.html', {"current_user":current_user})
+
+@api_view(['GET','POST'])
+def profile_list(request, format=None):
+    #get all profiles
+    if request.method =='GET':
+        profiles = Profile.objects.all()
+        #serialize them
+        serializer = ProfileSerializer(profiles, many=True)
+        #return json
+        return Response(serializer.data)
+    if request.method =='POST':
+        serializer = ProfileSerializer(data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
+
+@api_view(['GET','PUT','DELETE'])
+def profile_detail(request,id, format=None):
+    current_user=request.user
+    profile = Profile.objects.filter(id=current_user.id).first()
+    try:
+        Profile.objects.get(pk=id)
+    except Profile.DoesNotExist:
+        return Response(status=status.HTTP_404_NOT_FOUND)
+    if request.method =='GET':
+        serializer = ProfileSerializer(profile)
+        return Response(serializer.data)
+    elif request.method =='PUT':
+        serializer = ProfileSerializer(profile, data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+    elif request.method =='DELETE':
+        profile.delete()
+        return Response(status=status.HTTP_204_NO_CONTENT)                  
+
+
+
+
+
 
 
