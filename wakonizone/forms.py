@@ -1,7 +1,7 @@
 from django import forms
 from django.contrib.auth.models import User
 from django.contrib.auth.forms import UserCreationForm
-from django.forms import ModelForm, widgets
+from django.forms import EmailField, ModelForm, widgets
 from .models import Profile, Business
 
 class UserRegisterForm(UserCreationForm):
@@ -35,6 +35,7 @@ class NewBusinessForm(forms.ModelForm):
     business_image = forms.ImageField(required=True)
     description = forms.CharField(widget=forms.TextInput(attrs={'class': 'input', 'placeholder': 'Description'}), required=True)
     link = forms.CharField(widget=forms.TextInput(attrs={'class': 'input', 'placeholder': 'Link'}), required=True)
+    # Email
 
 
     class Meta:

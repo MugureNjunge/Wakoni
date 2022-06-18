@@ -1,14 +1,12 @@
-<!-- {% extends 'base.html' %} -->
 {% load static %}
-<!-- {% block content %} -->
 
 <div class="container">
   
     <div class="row">  <hr>
-        {% if searched_project %}
-        <h2>{{searched_project | length}} projects found.</h2>
+        {% if searched_business %}
+        <h2>{{searched_business | length}} projects found.</h2>
         {% else %}
-        <h2>Found 0 projects {{message | title}} </h2>
+        <h2>Found 0 businesses {{message | title}} </h2>
         {% endif %}
     </div>
     <div class="row">
@@ -17,8 +15,8 @@
             <div class="shadow p-3 mb-4 bg-body rounded-top border-top border-2 border-aquamarine" style="border-radius:10px;">
               <div class="card-header">
                 <h2 class="card-title text-center" >
-                  <a style="text-decoration:none;" href="{{ project.link }}" target="_blank">
-                    {{business.business_name}}  
+                  <a style="text-decoration:none;" href="{{ business.link }}" target="_blank">
+                    {{business.title}}  
                     {{business.business_image}}  
                     {{business.description}} 
                     {{ business.link}}
@@ -27,7 +25,7 @@
 
               </div>
               
-              <img class="card-img-top" class="img-responsive" src="{{project.project_image.url}}" size="100px100"style="border-radius:15px; ">
+              <img class="card-img-top" class="img-responsive" src="{{business.business_image.url}}" size="100px100"style="border-radius:15px; ">
 
               
 

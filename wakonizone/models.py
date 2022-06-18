@@ -62,12 +62,14 @@ class Business(models.Model):
     title = models.CharField(max_length=30)
     business_email = models.EmailField(max_length=30)
     business_image= CloudinaryField('image')
+    link= models.CharField(max_length=250,blank=True)
+    description= models.TextField()
     # locality = models.OneToOneField(User,on_delete=models.CASCADE, null=True)
    
     user= models.ForeignKey(User, on_delete=models.CASCADE, null=True)
 
     def __str__(self):
-        return self.business_name + ' - ' + self.business_email
+        return self.title + ' - ' + self.link
     
     def create_business(self):
         self.create()
