@@ -176,8 +176,8 @@
 
   <div class="d-flex flex-column flex-shrink-0 p-3 text-white bg-dark" style="width: 280px;">
     <a href="/" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-white text-decoration-none">
-      <svg class="bi pe-none me-2" width="40" height="32"><use xlink:href="#bootstrap"/></svg>
-      <span class="fs-4">Sidebar</span>
+      <svg class="bi pe-none me-2" width="40" height="32"><use xlink:href=""/></svg>
+      <span class="fs-4">WakoniZone</span>
     </a>
     <hr>
     <ul class="nav nav-pills flex-column mb-auto">
@@ -201,40 +201,50 @@
           <svg class="bi pe-none me-2" width="16" height="16"><use xlink:href="#speedometer2"/></svg>
           Police Department
         </a>
+        
       </li>
-    
+
       <li>
-          
+        <a href="{% url 'profile' request.user %}" class="nav-link text-white">          
+          <svg class="bi pe-none me-2" width="16" height="16"><use xlink:href="#people-circle"/></svg>
+          Profile
+        </a>    
+      </li>
+
+      <li>         
         <a href="#" class="d-flex align-items-center text-white text-decoration-none dropdown-toggle" id="dropdownUser1" data-bs-toggle="dropdown" aria-expanded="false">
-          <svg class="bi pe-none me-2" width="16" height="16"><use xlink:href="#speedometer2"/></svg>
+          <svg class="bi pe-none me-2" width="16" height="16"><use xlink:href="#grid"/></svg>
           <strong>Choose Locality</strong>
-        </a>
-        <ul class="dropdown-menu dropdown-menu-dark text-small shadow" aria-labelledby="dropdownUser1">
-          <li><a class="dropdown-item" href="#">Gikuni</a></li>
-          <li><a class="dropdown-item" href="#">Marugu</a></li>
+       
+          <ul class="dropdown-menu dropdown-menu-dark text-small shadow" aria-labelledby="dropdownUser1">
+            <li><a class="dropdown-item" href="#">Gikuni</a></li>
+            <li><a class="dropdown-item" href="#">Marugu</a></li>
+            
+            <li><hr class="dropdown-divider"></li>
+            
+          </ul>
+        </a>  
           
-          <li><hr class="dropdown-divider"></li>
-          
-        </ul>
-          
-      </li>    
+      </li> 
+
     </ul>
     <hr>
   </div>
 
-  <div class="b-example-divider b-example-vr"></div>
+  
 
     <!-- end of sidebar -->
     
-<!-- index page body -->
+    <!-- index page body -->
 
 
-  <div class="position-relative overflow-hidden p-3 p-md-5 m-md-3 text-center bg-light">
+  <div class="position-relative overflow-hidden p-3 p-md-3 m-md-3 text-center bg-light">
    
     <div class="product-device shadow-sm d-none d-md-block"></div>
     <div class="product-device product-device-2 shadow-sm d-none d-md-block"></div>
   </div>
-
+  
+  
   <div class="d-md-flex flex-md-equal w-100 my-md-3 ps-md-3">
     <div class="bg-dark me-md-3 pt-3 px-3 pt-md-5 px-md-5 text-center text-white overflow-hidden">
       <div class="my-3 py-3">
@@ -245,27 +255,10 @@
     </div>
     <div class="bg-light me-md-3 pt-3 px-3 pt-md-5 px-md-5 text-center overflow-hidden">
       <div class="my-3 p-3">
-        <h2 class="display-5">Another headline</h2>
-        <p class="lead">And an even wittier subheading.</p>
-      </div>
-      <div class="bg-dark shadow-sm mx-auto" style="width: 80%; height: 300px; border-radius: 21px 21px 0 0;"></div>
-    </div>
-  </div>
-
-  <div class="d-md-flex flex-md-equal w-100 my-md-3 ps-md-3">
-    <div class="bg-light me-md-3 pt-3 px-3 pt-md-5 px-md-5 text-center overflow-hidden">
-      <div class="my-3 p-3">
         <h2 class="display-5">Zonal News</h2>
         <p class="lead">And an even wittier subheading.</p>
       </div>
       <div class="bg-dark shadow-sm mx-auto" style="width: 80%; height: 300px; border-radius: 21px 21px 0 0;"></div>
-    </div>
-    <div class="bg-primary me-md-3 pt-3 px-3 pt-md-5 px-md-5 text-center text-white overflow-hidden">
-      <div class="my-3 py-3">
-        <h2 class="display-5">Another headline</h2>
-        <p class="lead">And an even wittier subheading.</p>
-      </div>
-      <div class="bg-light shadow-sm mx-auto" style="width: 80%; height: 300px; border-radius: 21px 21px 0 0;"></div>
     </div>
   </div>
 

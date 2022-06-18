@@ -130,6 +130,24 @@ CRISPY_TEMPLATE_PACK = 'bootstrap4'
 
 STATIC_URL = 'static/'
 
+# Configure Django App for Heroku.
+
+
+#  adding cloudinary config
+cloudinary.config( 
+    cloud_name = "dgfh6brqy", 
+    api_key = "554629923257433", 
+    api_secret = "RCanW-BoCm3Eyl3qpfNs7WCugT8" 
+)
+
+
+LOGIN_REDIRECT_URL = 'index'
+
+LOGOUT_REDIRECT_URL = 'sign-in'
+
+LOGIN_URL = ''
+
+
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.0/ref/settings/#default-auto-field
 

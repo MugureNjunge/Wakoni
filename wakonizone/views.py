@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.models import User
 from django.contrib import messages
-from django.contrib.auth import authenticate, login
+from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.models import User
 from .models import Profile, Locality, Post
 from .forms import UserRegisterForm, ProfileForm
@@ -52,6 +52,11 @@ def signin(request):
     else:
         return render(request,'sign-in.html')
 
+def signout(request):  
+    logout(request) 
+
+    return redirect('sign-in')        
+
 def UserLocality(request, username):
     Locality.objects.get(user=request.user)
     user = get_object_or_404(User, username=username)
@@ -66,8 +71,6 @@ def UserLocality(request, username):
 
     }
     return render(request, 'locality.html', context)
-
-
 
 def UserProfile(request, username):
    

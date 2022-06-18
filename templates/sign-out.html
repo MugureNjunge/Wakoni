@@ -3,52 +3,41 @@
 <!DOCTYPE html>
 <html lang="en">
 
-  <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <script src="https://kit.fontawesome.com/fc1e235b2e.js"></script>
+    <head>
+      <meta charset="UTF-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <meta http-equiv="X-UA-Compatible" content="ie=edge">
+      <script src="https://kit.fontawesome.com/fc1e235b2e.js"></script>
+      
+      <link href="{% static 'css/bootstrap.min.css'%}" rel="stylesheet">
 
-  <link href="{% static 'css/bootstrap.min.css'%}" rel="stylesheet">
-  <title>Instagram | Out</title>
-  </head>
+      <title>Sign Out </title>
+    </head>
 
-  <body>
-
-    <div id="wrapper">
-      <div class="container">
-        <div class="phone-app-demo"></div>
-        <div class="form-data">
-          <form action="">
-            <div class="logo">
-                <img src="{% static 'assets2/images/logo.png' %}" alt="logo">
-            </div>
-            <input type="text" placeholder="Phone number, username, or email">
-            <input type="password" placeholder="Password">
-            <button class="form-btn" type="submit"><a href="index.html" style="color: white;">Log in</a></button>
-            
-            <!-- <a href="index.html" class="form-btn" type="submit">Log in</a> -->
-            
-            <a class="password-reset" href="#">Forgot password?</a>
-          </form>
-        </div>  
-
-        <div class="sign-up">
-          Don't have an account? <a href="{% url 'sign-up' %}">Sign Up</a>
-        </div>
-        <div class="get-the-app">
-          <span>Get the app.</span>
-          <div class="badges">
+    <body>
+      <div id="wrapper">
+        <div class="container">
+        
+          <div class="form-data">
+            <form action="">
+    
+              <input type="text" placeholder="Phone number, username, or email">
+              <input type="password" placeholder="Password">
+              <button class="form-btn" type="submit"><a href="index.html" style="color: white;">Log in</a></button>
               
+              <!-- <a href="index.html" class="form-btn" type="submit">Log in</a> -->
+              
+              <a class="password-reset" href="#">Forgot password?</a>
+            </form>
+          </div>  
+
+          <div class="sign-up">
+            Not yet a memeber? <a href="{% url 'sign-up' %}">Join us</a>
           </div>
-        </div>
+          
 
-      </div>  
-    </div>
+        </div>  
+      </div>
 
-  </body>
-
-</html> 
-
-
-{% endblock %}
+    </body>
+</html>    
