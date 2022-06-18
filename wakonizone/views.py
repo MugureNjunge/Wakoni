@@ -3,7 +3,7 @@ from django.contrib.auth.models import User
 from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout
 from .models import *
-from .forms import UserRegisterForm, ProfileForm
+from .forms import UserRegisterForm, ProfileForm, NewBusinessForm
 from django.contrib.auth.decorators import login_required
 from .serializers import ProfileSerializer, LocalitySerializer
 from rest_framework import status
@@ -205,5 +205,21 @@ def locality_detail(request,id, format=None):
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
     elif request.method =='DELETE':
         locality.delete()
-        return Response(status=status.HTTP_204_NO_CONTENT)       
+        return Response(status=status.HTTP_204_NO_CONTENT)  
+
+@login_required(login_url='/accounts/sign-in/')
+def NewBusiness(request):
+    current_user = request.user
+    if request.method == 'POST':
+        form = NewBusinessForm(request.POST, request.FILES)
+        if form.is_valid():
+            business = form.save(commit=False)
+            business.user = current_user
+            business.save()
+        return redirect('index')
+        
+    else:
+        form = NewBusinessForm()
+    return render(request, 'new-business.html', {"form":form, "current_user":current_user})
+
 
