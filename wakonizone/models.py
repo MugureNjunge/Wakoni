@@ -24,6 +24,9 @@ class Profile(models.Model):
         profile = Profile.objects.filter(user__username__icontains = name)
         return profile
 
+    def update_profile(self):
+         self.update()        
+
     def delete_profile(self):
          self.delete()
 
@@ -49,7 +52,10 @@ class Locality(models.Model):
     @classmethod
     def search_by_user(cls, user):
         localities = cls.objects.filter(user=user)
-        return localities     
+        return localities   
+
+    def update_locality(self):
+       self.update()        
 
     def delete_locality(self):
         self.delete()         
@@ -85,5 +91,15 @@ class Post(models.Model):
     def get_posts_by_profile(cls, profile):
         posts = Post.objects.filter(profile__pk=profile)
         return posts
+
+class Video(models.Model):
+    caption=models.CharField(max_length=100)
+    video=models.FileField(upload_to="video/%y") 
+
+    def __str__(self):
+      return self.caption
+
+
+
     
 

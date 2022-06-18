@@ -16,10 +16,15 @@ from django.http import JsonResponse, HttpResponseRedirect
 from django.urls import resolve, reverse
 from django.core.exceptions import ObjectDoesNotExist
 
-# @login_required(login_url='/accounts/sign-in/')
+
 def index(request):
-    localities = Locality.objects.all()
-    return render(request,'index.html',{'localities':localities})
+    
+    return render(request, 'index.html')
+
+def index(request):
+    video=Video.objects.all()
+    
+    return render(request,'index.html',{"video":video})
 
 def register(request):
     
@@ -65,20 +70,22 @@ def signout(request):
 
     return redirect('sign-in')        
 
-@login_required(login_url='/accounts/sign-in/')
+# @login_required(login_url='/accounts/sign-in/')
 def UserLocality(request, username):
     Locality.objects.get(user=request.user)
     user = get_object_or_404(User, username=username)
 
-    locality = Locality.objects.get(username=username)
-    profiles = Profile.objects.filter(username=username)
+    locality = Locality.objects.get(user=request.user)
+    profiles = Profile.objects.filter(user=user)
 
     context = {
       
         'locality': locality,
-        'profiles': profiles
+        'profiles': profiles,
+        'username': username
 
     }
+    
     return render(request, 'locality.html', context)
 
 @login_required(login_url='/accounts/sign-in/')
@@ -164,7 +171,9 @@ def profile_detail(request,id, format=None):
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
     elif request.method =='DELETE':
         profile.delete()
-        return Response(status=status.HTTP_204_NO_CONTENT)                  
+        return Response(status=status.HTTP_204_NO_CONTENT)   
+
+
 
 
 

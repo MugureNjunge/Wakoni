@@ -16,6 +16,8 @@ urlpatterns = [
 
     path('profiles/',views.profile_list, name='profile_api'),
 
+    path('profiles/<int:id>', views.profile_detail),
+
     path('locality/',views.UserLocality,name='locality'),
     path('police/', views.Police, name='police'),
     path('health/', views.Health, name='health'),
