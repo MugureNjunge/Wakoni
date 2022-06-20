@@ -39,7 +39,7 @@ class Profile(models.Model):
     profile_pic= CloudinaryField('image')
     bio= models.CharField(max_length=50,blank=True)
 
-    locality= models.ForeignKey(Locality, on_delete=models.CASCADE, null=True)
+    # locality= models.ForeignKey(Locality, on_delete=models.CASCADE, null=True)
 
     def __str__(self):
         return self.fullname

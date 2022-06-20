@@ -62,17 +62,27 @@ def signin(request):
 def signout(request):  
     logout(request) 
 
-    return redirect('sign-in')   
-
-def neighborhood(request, neighborhood_id):
-    neighborhood = Locality.objects.get(id=neighborhood_id)
+    return redirect('sign-in') 
+    
+def local(request, local_id):
+    local = Locality.objects.get(id=local_id)
     newpostform = NewPostForm()
     newbusinessform = NewBusinessForm()
     current_user = request.user
-    business = Business.objects.filter(neighbourhood_id=neighborhood)
-    users = Profile.objects.filter(neighbourhood=neighborhood)
-    posts = Post.objects.filter(neighbourhood=neighborhood)
-    return render(request, 'locality.html', {'newpostform':newpostform, 'newbusinessform': newbusinessform, 'users':users,'current_user':current_user, 'neighborhood':neighborhood,'business':business,'posts':posts})         
+    business = Business.objects.filter(locality_id=local)
+    users = Profile.objects.filter(locality=local)
+    posts = Post.objects.filter(locality=local)
+    return render(request, 'locality.html', {'newpostform':newpostform, 'newbusinessform': newbusinessform, 'users':users,'current_user':current_user, 'local':local,'business':business,'posts':posts})      
+
+# def locality(request, locality_id):
+#     locality = Locality.objects.get(id=locality_id)
+#     newpostform = NewPostForm()
+#     newbusinessform = NewBusinessForm()
+#     current_user = request.user
+#     business = Business.objects.filter(locality_id=locality)
+#     users = Profile.objects.filter(locality=locality)
+#     posts = Post.objects.filter(locality=locality)
+#     return render(request, 'locality.html', {'newpostform':newpostform, 'newbusinessform': newbusinessform, 'users':users,'current_user':current_user, 'locality':locality,'business':business,'posts':posts})         
 
 # # @login_required(login_url='/accounts/sign-in/')
 # def UserLocality(request, username):
