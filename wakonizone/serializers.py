@@ -14,9 +14,9 @@ class LocalitySerializer(serializers.ModelSerializer):
 class BusinessSerializer(serializers.ModelSerializer):
     class Meta:
         model=Business
-        fields=('title','description','business_image','link','business_email')   
+        fields=('title','description','business_image','link','business_email'), 'locality'   
 
 class PostSerializer(serializers.ModelSerializer):
     class Meta:
         model=Post
-        fields=('title','description','post_image')                       
+        fields=('title','description','post_image', 'locality')                       

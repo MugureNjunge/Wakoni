@@ -16,15 +16,9 @@ from django.http import JsonResponse, HttpResponseRedirect
 from django.urls import resolve, reverse
 from django.core.exceptions import ObjectDoesNotExist
 
-
-@login_required(login_url='/accounts/sign-in/')
 def index(request):
     
     return render(request, 'index.html')
-
-# def index(request):
-    
-#     return render(request,'index.html')
 
 def register(request):
     
@@ -68,25 +62,35 @@ def signin(request):
 def signout(request):  
     logout(request) 
 
-    return redirect('sign-in')        
+    return redirect('sign-in')   
 
-# @login_required(login_url='/accounts/sign-in/')
-def UserLocality(request, username):
-    Locality.objects.get(user=request.user)
-    user = get_object_or_404(User, username=username)
+def neighborhood(request, neighborhood_id):
+    neighborhood = Locality.objects.get(id=neighborhood_id)
+    newpostform = NewPostForm()
+    newbusinessform = NewBusinessForm()
+    current_user = request.user
+    business = Business.objects.filter(neighbourhood_id=neighborhood)
+    users = Profile.objects.filter(neighbourhood=neighborhood)
+    posts = Post.objects.filter(neighbourhood=neighborhood)
+    return render(request, 'locality.html', {'newpostform':newpostform, 'newbusinessform': newbusinessform, 'users':users,'current_user':current_user, 'neighborhood':neighborhood,'business':business,'posts':posts})         
 
-    locality = Locality.objects.get(user=request.user)
-    profiles = Profile.objects.filter(user=user)
+# # @login_required(login_url='/accounts/sign-in/')
+# def UserLocality(request, username):
+#     Locality.objects.get(username=user.username)
+#     user = get_object_or_404(Profile, user_username=username)
 
-    context = {
+#     locality = Locality.objects.get(username=request.user)
+#     profiles = Profile.objects.filter(user=user)
+
+#     context = {
       
-        'locality': locality,
-        'profiles': profiles,
-        'username': username
+#         'locality': locality,
+#         'profiles': profiles,
+#         'username': username
 
-    }
+#     }
     
-    return render(request, 'locality.html', context)
+#     return render(request, 'locality.html', context)
 
 @login_required(login_url='/accounts/sign-in/')
 def UserProfile(request, username):
@@ -97,7 +101,7 @@ def UserProfile(request, username):
 
     context = {
         
-        'profile':profile
+        'profile':profile,
         
     }
     return render(request, 'profile.html', context)

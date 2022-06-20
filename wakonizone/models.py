@@ -3,39 +3,12 @@ from django.contrib.auth.models import User
 from cloudinary.models import CloudinaryField
 from django.dispatch import receiver
 
-
-class Profile(models.Model):
-    
-    user = models.OneToOneField(User,on_delete=models.CASCADE, null=True)
-    fullname = models.CharField(max_length=50,blank=True)
-    locality = models.CharField(max_length=30, blank=True, null=True)
-    profile_pic= CloudinaryField('image')
-    bio= models.CharField(max_length=50,blank=True)
-    # email= models.EmailField(max_length=50,blank=True)
-
-    def __str__(self):
-        return self.fullname
-
-    @classmethod
-    def save_profile(self):
-      self.save() 
-
-    def search_profile(cls, name):
-        profile = Profile.objects.filter(user__username__icontains = name)
-        return profile
-
-    def update_profile(self):
-         self.update()        
-
-    def delete_profile(self):
-         self.delete()
-
 class Locality(models.Model):
-
+  
     locality_name = models.CharField(max_length=30)
     location = models.CharField(max_length=30, blank=True)
     occupants = models.IntegerField(blank=True, null=True)
-   
+
     user= models.ForeignKey(User, on_delete=models.CASCADE, null=True)
 
     def __str__(self):
@@ -56,7 +29,35 @@ class Locality(models.Model):
        self.update()        
        
     def delete_locality(self):
-        self.delete()    
+        self.delete() 
+
+class Profile(models.Model):
+    
+    user = models.OneToOneField(User,on_delete=models.CASCADE, null=True)
+    fullname = models.CharField(max_length=50,blank=True)
+    locality = models.CharField(max_length=30, blank=True, null=True)
+    profile_pic= CloudinaryField('image')
+    bio= models.CharField(max_length=50,blank=True)
+
+    locality= models.ForeignKey(Locality, on_delete=models.CASCADE, null=True)
+
+    def __str__(self):
+        return self.fullname
+
+    @classmethod
+    def save_profile(self):
+      self.save() 
+
+    def search_profile(cls, name):
+        profile = Profile.objects.filter(user__username__icontains = name)
+        return profile
+
+    def update_profile(self):
+         self.update()        
+
+    def delete_profile(self):
+         self.delete()
+   
 
 class Business(models.Model):
   
@@ -65,9 +66,8 @@ class Business(models.Model):
     business_image= CloudinaryField('image')
     link= models.CharField(max_length=250,blank=True)
     description= models.TextField(blank=True, null=True)
-    # locality = models.OneToOneField(User,on_delete=models.CASCADE, null=True)
    
-    user= models.ForeignKey(User, on_delete=models.CASCADE, null=True)
+    locality= models.ForeignKey(Locality, on_delete=models.CASCADE, null=True)
 
     def __str__(self):
         return self.title + ' - ' + self.link
@@ -91,7 +91,7 @@ class Post(models.Model):
     post_image= CloudinaryField('image')
     description= models.TextField(blank=True, null=True)
     
-    user= models.ForeignKey(User, on_delete=models.CASCADE, null=True)
+    locality= models.ForeignKey(Locality, on_delete=models.CASCADE, null=True)
     
 
     def __str__(self):

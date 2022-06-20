@@ -18,18 +18,18 @@ urlpatterns = [
     path('localities/',views.locality_list, name='locality_api'),
 
     path('profiles/<int:id>', views.profile_detail),
-      path('localities/<int:id>', views.locality_detail),
+    path('localities/<int:id>', views.locality_detail),
 
-    path('locality/',views.UserLocality,name='locality'),
+  
+    path('neighbourhood/<neighborhood_id>',views.neighborhood,name='neighbourhood'),
     path('police/', views.Police, name='police'),
     path('health/', views.Health, name='health'),
 
+    path('username/', views.UserProfile, name='profile'),
     path('profile/edit/', views.EditProfile, name='editprofile'),
     path('newbusiness', views.NewBusiness, name='newbusiness'),
     path('newpost', views.NewPost, name='newpost'),
 
     path('search/', views.search, name='search'),
     
-   
-
 ]
