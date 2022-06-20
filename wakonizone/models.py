@@ -38,7 +38,7 @@ class Locality(models.Model):
     user= models.ForeignKey(User, on_delete=models.CASCADE, null=True)
 
     def __str__(self):
-        return self.location + ' - ' + self.locality_name
+        return self.locality_name + ' - ' + self.occupants
     
     def create_locality(self):
         self.create()

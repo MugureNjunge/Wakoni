@@ -17,13 +17,10 @@ from django.urls import resolve, reverse
 from django.core.exceptions import ObjectDoesNotExist
 
 
+@login_required(login_url='/accounts/sign-in/')
 def index(request):
     
     return render(request, 'index.html')
-
-def index(request):
-    
-    return render(request,'index.html')
 
 def register(request):
     
@@ -37,8 +34,8 @@ def register(request):
 
             user = authenticate(username=username, password=password)
             login(request,user)
-            messages.success(request, f'Account created for { username }!!')
-            return redirect('index')
+            messages.success(request, f'Account created for { username }!!Go ahead and edit your profile to get started..')
+            return redirect('profile')
 
     else:
         form = UserRegisterForm()
