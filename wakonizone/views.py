@@ -16,6 +16,7 @@ from django.http import JsonResponse, HttpResponseRedirect
 from django.urls import resolve, reverse
 from django.core.exceptions import ObjectDoesNotExist
 
+@login_required(login_url='/accounts/sign-in/')
 def index(request):
     
     return render(request, 'index.html')
@@ -63,44 +64,22 @@ def signout(request):
     logout(request) 
 
     return redirect('sign-in') 
+
+# @login_required(login_url='/accounts/sign-in/')
+# def local(request):
+#     return render(request,"locality.html")
+
     
-def local(request, local_id):
-    local = Locality.objects.get(id=local_id)
+def local(request, locality_id):
+    local = Locality.objects.get(locality_id=id)
     newpostform = NewPostForm()
     newbusinessform = NewBusinessForm()
     current_user = request.user
     business = Business.objects.filter(locality_id=local)
     users = Profile.objects.filter(locality=local)
     posts = Post.objects.filter(locality=local)
-    return render(request, 'locality.html', {'newpostform':newpostform, 'newbusinessform': newbusinessform, 'users':users,'current_user':current_user, 'local':local,'business':business,'posts':posts})      
+    return render(request, 'locality.html', {'newpostform':newpostform, 'newbusinessform': newbusinessform, 'users':users,'current_user':current_user, 'local':local,'business':business,'posts':posts})         
 
-# def locality(request, locality_id):
-#     locality = Locality.objects.get(id=locality_id)
-#     newpostform = NewPostForm()
-#     newbusinessform = NewBusinessForm()
-#     current_user = request.user
-#     business = Business.objects.filter(locality_id=locality)
-#     users = Profile.objects.filter(locality=locality)
-#     posts = Post.objects.filter(locality=locality)
-#     return render(request, 'locality.html', {'newpostform':newpostform, 'newbusinessform': newbusinessform, 'users':users,'current_user':current_user, 'locality':locality,'business':business,'posts':posts})         
-
-# # @login_required(login_url='/accounts/sign-in/')
-# def UserLocality(request, username):
-#     Locality.objects.get(username=user.username)
-#     user = get_object_or_404(Profile, user_username=username)
-
-#     locality = Locality.objects.get(username=request.user)
-#     profiles = Profile.objects.filter(user=user)
-
-#     context = {
-      
-#         'locality': locality,
-#         'profiles': profiles,
-#         'username': username
-
-#     }
-    
-#     return render(request, 'locality.html', context)
 
 @login_required(login_url='/accounts/sign-in/')
 def UserProfile(request, username):

@@ -31,34 +31,6 @@ class Locality(models.Model):
     def delete_locality(self):
         self.delete() 
 
-class Profile(models.Model):
-    
-    user = models.OneToOneField(User,on_delete=models.CASCADE, null=True)
-    fullname = models.CharField(max_length=50,blank=True)
-    locality = models.CharField(max_length=30, blank=True, null=True)
-    profile_pic= CloudinaryField('image')
-    bio= models.CharField(max_length=50,blank=True)
-
-    # locality= models.ForeignKey(Locality, on_delete=models.CASCADE, null=True)
-
-    def __str__(self):
-        return self.fullname
-
-    @classmethod
-    def save_profile(self):
-      self.save() 
-
-    def search_profile(cls, name):
-        profile = Profile.objects.filter(user__username__icontains = name)
-        return profile
-
-    def update_profile(self):
-         self.update()        
-
-    def delete_profile(self):
-         self.delete()
-   
-
 class Business(models.Model):
   
     title = models.CharField(max_length=30)
@@ -66,6 +38,7 @@ class Business(models.Model):
     business_image= CloudinaryField('image')
     link= models.CharField(max_length=250,blank=True)
     description= models.TextField(blank=True, null=True)
+    owner = models.ForeignKey(User, on_delete=models.CASCADE)
    
     locality= models.ForeignKey(Locality, on_delete=models.CASCADE, null=True)
 
@@ -112,6 +85,35 @@ class Post(models.Model):
     def get_posts_by_profile(cls, profile):
         posts = Post.objects.filter(profile__pk=profile)
         return posts
+
+class Profile(models.Model):
+    
+    user = models.OneToOneField(User,on_delete=models.CASCADE, null=True)
+    profile_pic= CloudinaryField('image')
+    bio= models.CharField(max_length=50,blank=True)
+    email = models.EmailField(null=True)
+    contact = models.CharField(max_length=12)
+
+    locality = models.ForeignKey(Locality, on_delete=models.CASCADE,null=True)
+
+    def __str__(self):
+        return self.fullname
+
+    @classmethod
+    def save_profile(self):
+      self.save() 
+
+    def search_profile(cls, name):
+        profile = Profile.objects.filter(user__username__icontains = name)
+        return profile
+
+    def update_profile(self):
+         self.update()        
+
+    def delete_profile(self):
+         self.delete()
+   
+
 
 
 

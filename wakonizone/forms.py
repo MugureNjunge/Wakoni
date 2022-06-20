@@ -16,18 +16,11 @@ class UserRegisterForm(UserCreationForm):
         model = User
         fields = ['username', 'email', 'password1', 'password2']
 
-class ProfileForm(ModelForm):
-
-    profile_pic = forms.ImageField(required=True)        
-    fullname = forms.CharField(widget=forms.TextInput(attrs={'class':'form-control', 'placeholder':'fullname'}))
-    locality = forms.CharField(widget=forms.TextInput(attrs={'class':'form-control', 'placeholder':'locality'}))
-    bio = forms.CharField(widget=forms.TextInput(attrs={'class': 'input', 'placeholder': 'Bio'}), required=True)
-    
+class ProfileForm(forms.ModelForm):
     class Meta:
-
         model = Profile
-        fields = ['fullname', 'locality','profile_pic', 'bio']
-        exclude =['user']
+        exclude = ['user']
+
 
 class NewBusinessForm(forms.ModelForm):
 

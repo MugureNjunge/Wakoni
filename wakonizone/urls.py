@@ -19,8 +19,9 @@ urlpatterns = [
 
     path('profiles/<int:id>', views.profile_detail),
     path('localities/<int:id>', views.locality_detail),
-
-    path('locality<local_id>',views.local,name='locality'),
+    
+    # path('locality/',views.local,name='locality'),
+    path('locality/<int:locality_id>',views.local,name='locality'),
     path('police/', views.Police, name='police'),
     path('health/', views.Health, name='health'),
 
