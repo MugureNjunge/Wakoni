@@ -22,11 +22,11 @@ class ProfileForm(ModelForm):
     fullname = forms.CharField(widget=forms.TextInput(attrs={'class':'form-control', 'placeholder':'fullname'}))
     locality = forms.CharField(widget=forms.TextInput(attrs={'class':'form-control', 'placeholder':'locality'}))
     bio = forms.CharField(widget=forms.TextInput(attrs={'class': 'input', 'placeholder': 'Bio'}), required=True)
-  
+    
     class Meta:
 
         model = Profile
-        fields = ['fullname', 'locality','profile_pic']
+        fields = ['fullname', 'locality','profile_pic', 'bio']
         exclude =['user']
 
 class NewBusinessForm(forms.ModelForm):

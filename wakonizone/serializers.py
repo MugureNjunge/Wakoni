@@ -9,7 +9,7 @@ class ProfileSerializer(serializers.ModelSerializer):
 class LocalitySerializer(serializers.ModelSerializer):
     class Meta:
         model=Locality
-        fields=('locality_name','occupants','locality_image')        
+        fields=('locality_name','occupants','location')        
 
 class BusinessSerializer(serializers.ModelSerializer):
     class Meta:

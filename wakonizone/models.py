@@ -33,12 +33,13 @@ class Profile(models.Model):
 class Locality(models.Model):
 
     locality_name = models.CharField(max_length=30)
+    location = models.CharField(max_length=30, blank=True)
     occupants = models.IntegerField(blank=True, null=True)
    
     user= models.ForeignKey(User, on_delete=models.CASCADE, null=True)
 
     def __str__(self):
-        return self.locality_name + ' - ' + self.occupants
+        return self.locality_name 
     
     def create_locality(self):
         self.create()

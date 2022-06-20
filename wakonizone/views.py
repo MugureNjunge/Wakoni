@@ -22,6 +22,10 @@ def index(request):
     
     return render(request, 'index.html')
 
+# def index(request):
+    
+#     return render(request,'index.html')
+
 def register(request):
     
     if request.method == "POST":
@@ -34,8 +38,8 @@ def register(request):
 
             user = authenticate(username=username, password=password)
             login(request,user)
-            messages.success(request, f'Account created for { username }!!Go ahead and edit your profile to get started..')
-            return redirect('profile')
+            messages.success(request, f'Account created for { username }!!')
+            return redirect('index')
 
     else:
         form = UserRegisterForm()
